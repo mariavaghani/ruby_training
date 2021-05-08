@@ -24,3 +24,4 @@ elsif op == '%'
   result = num1 % num2
 end
 puts result
+puts "hurray"
