@@ -1,15 +1,19 @@
-# 15.times{ puts rand(5..15)}
-
-
-x = (1..10) # Range
-puts x.class
-x = (1..10).to_a #to create an array
-(1..10).to_a.shuffle # to shuffle the numbers in the array
+#symbols in hashes
+new_hash = {a: 5, b: 8, t: "Maria", r: "Akshay"}
+p new_hash
+puts new_hash[:a]
 puts
-print x.to_a.shuffle! # does not modify x
-puts "\nx after shuffle!"
-print x
+print new_hash.keys
 puts
-z = x.to_a.shuffle! # makes a
-puts "Array z >>>>"
-print z
+print new_hash.values
+puts
+new_hash.each {|k,v| puts "The key of #{v} is #{k.class}"}
+
+#.select works with hashes as well!!!
+puts
+print new_hash.select {|k,v| v.is_a?(String)}
+
+new_hash.each { |k,v| new_hash.delete(k) if v.is_a? String}
+
+puts
+print new_hash
