@@ -1,60 +1,22 @@
-def sum_of_squared_divisors(num)
-  divisors = []
-  (1..num ** 0.5).each do |div|
-    if (num % div == 0) && (div * div != num)
-      divisors.push(div, num / div)
-    end
-    if (div * div == num)
-      divisors << div
-    end
-  end
-  divisors = divisors.map {|div| div ** 2}
-  sum = 0
-  divisors.each {|div| sum += div}
-  return sum
-end
-#
-# def sum_of_squared_divisors2(num)
-#   divisors = (1..num).select {|div| num % div == 0}
-#   divisors = divisors.map {|div| div ** 2}
-#   sum = 0
-#   divisors.each {|div| sum += div}
-#   return sum
-# end
-
-def is_square?(num)
-  return (num ** 0.5) == (num ** 0.5).to_i
-end
-
-def list_squared(m, n)
-  out_list = []
-  (m..n).each do |test|
-    sum_of_squares = sum_of_squared_divisors(test)
-    if is_square?(sum_of_squares)
-      out_list << [test, sum_of_squares]
+def solution(input, markers)
+  lines = input.split("\n")
+  new_lines = lines
+  markers.each do |marker|
+    lines.each_with_index do |line, idx|
+      if line.include?(marker)
+        new_lines[idx] = line.split(marker)[0].strip
+      else
+        new_lines[idx] = line.strip
+      end
+      # print "#{line} | needs to remove after #{marker}"
+      # puts
     end
   end
-  return out_list
+  new_lines.join("\n")
 end
-#[25,676]
-print list_squared(1, 250) # [[1, 1], [42, 2500], [246, 84100]]
-puts
-print list_squared(42, 250) # [[42, 2500], [246, 84100]]
-puts
-print list_squared(250, 500) # [[287, 84100]]
-puts
-print list_squared(962, 4432) # [[287, 84100]]
-puts
 
 
-# print sum_of_squared_divisors(25)
-# puts
-# print sum_of_squared_divisors2(25)
-# print sum_of_squared_divisors(246)
 
-
-#
-
-
-# puts "What is your name?"
-# name = gets.chomp
+print solution("apples, plums % and bananas\npears\noranges !applesauce", ["%", "!"])
+# "apples, plums\npears\noranges"
+#puts solution("Q @b\nu\ne -e f g", ["@", "-"]) # "Q\nu\ne"
